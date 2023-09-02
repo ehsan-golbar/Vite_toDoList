@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "./index.css";
+import ToDo from "./components/ToDo.jsx";
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
           <h1>Icons Link</h1>
         </div>
       </div>
-      <div className="h-28 bg-purple-500 text-center lg:col-span-1 md:col-span-2">
+      <div className="h-28  text-center lg:col-span-1 md:col-span-2">
         <h1 className="bg-slate-600 ">To Do List </h1>
+        <ToDo ></ToDo>
       </div>
     </div>
   );
