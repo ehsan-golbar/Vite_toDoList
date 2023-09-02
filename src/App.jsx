@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import "./index.css";
 import ToDo from "./components/ToDo.jsx";
+import GoogleSearch from "./components/GoogleSearch.jsx";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         <h1 className="bg-slate-600 text-center">Search </h1>
         <div className="h--28 bg-yellow-400 text-center">
           <h1 className="">Google</h1>
+            <div>
+                <GoogleSearch></GoogleSearch>
+            </div>
           <h1>Icons Link</h1>
         </div>
       </div>
