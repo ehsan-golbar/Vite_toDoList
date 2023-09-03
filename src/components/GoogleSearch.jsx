@@ -1,7 +1,7 @@
 
 function GoogleSearch() {
     return (
-        <div class="flex flex-col items-center justify-center bg-white">
+        <div class="flex flex-col items-center justify-center bg-white rounded-3xl p-3">
 
   <div>
     <img class="h-[89px] w-[273px]" src="https://ppc.co/wp-content/uploads/2021/01/Google.png" alt="google Logo" />

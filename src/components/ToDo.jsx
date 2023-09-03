@@ -30,7 +30,7 @@ function ToDo() {
   };
 
   return (
-    <div className="grid justify-items-center bg-white p-3">
+    <div className="grid justify-items-center bg-white p-3 rounded-3xl">
       <h1 className="text-6xl font-bold"> To Do List </h1>
 
       <div className="flex space-x-5 mt-6">
