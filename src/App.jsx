@@ -24,6 +24,8 @@ function App() {
               alt=""
             />
           </div>
+
+          <div className="col-span-2 space-y-3 md:col-span-2 md:flow-col" >
           <div className="col-span-2">
             {/* <h1 className="bg-gray-700  text-center">date of today</h1> */}
             <img
@@ -40,8 +42,11 @@ function App() {
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqwCdTyazWz5p-tztnsIDmKpwi6VoyNcaoZQwhIo6_v11fg9oefBwqCu8j-gx9aDVxweQ&usqp=CAU"
               alt=""
             />
-          {/* </div> */}
+               {/* </div> */}
+          </div>
         </div>
+
+
       </div>
       <div className=" ">
         {/* <h1 className="bg-slate-600 text-center">Search </h1> */}
