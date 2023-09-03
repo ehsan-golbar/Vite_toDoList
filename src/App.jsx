@@ -8,18 +8,21 @@ import DateTime from "./components/DateTime.jsx";
 function App() {
   return (
     <div className=" lg:grid  lg:grid-cols-3 md:flex md:flex-col flex flex-col gap-5 p-3">
-      <div className="lg:grid lg:grid-cols-2 gap-3 md:flex md:flex-row grid grid-cols-2">
+      <div className="lg:grid lg:grid-cols-2 gap-3 md:flex md:flex-row grid grid-cols-2 ">
         {/* <h1 className="bg-slate-600 text-center">Time </h1> */}
         {/* <div className=""> */}
-        
-        <div className="md:w-full lg:w-full">
+
+        <div className="md:w-full lg:w-40">
           {/* <h1 className="bg-red-600 text-center">clock </h1> */}
           {/* <div className=" font-bold flex justify-center  ">17 : 46</div> */}
-          <img className="w-full rounded-3xl "
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIriahCd4k7aypjqs81jemysyXcf8C6yFW6A&usqp=CAU" alt="" />
+          <img
+            className="w-full rounded-3xl  "
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIriahCd4k7aypjqs81jemysyXcf8C6yFW6A&usqp=CAU"
+            alt=""
+          />
           {/* <DateTime flag="time"></DateTime> */}
         </div>
-        <div className="w-full md:w-full">
+        <div className="w-full md:w-full lg:w-40">
           {/* <h1 className="bg-yellow-600 text-center"> tempreture </h1> */}
           <img
             className="w-full rounded-3xl "
@@ -29,24 +32,24 @@ function App() {
         </div>
 
         {/* <div className="col-span-2 space-y-3 md:col-span-2 md:flow-col"> */}
-          <div className="lg:col-span-2 w-full ">
-            {/* <h1 className="bg-gray-700  text-center">date of today</h1> */}
-            <img
-              className="w-full  rounded-3xl"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSbNPH3g6gHXKzBPQn_PnYyr8bWw3hc4xfBmkVzQMNjO-P0mQmitiuqI7Z1AuBUQ6aciI&usqp=CAU"
-              alt=""
-            />
-          </div>
+        <div className="lg:col-span-2 w-full md:w-full lg:w-full max-h-full object-cover ">
+          {/* <h1 className="bg-gray-700  text-center">date of today</h1> */}
+          <img
+            className="w-full h-full rounded-3xl"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSbNPH3g6gHXKzBPQn_PnYyr8bWw3hc4xfBmkVzQMNjO-P0mQmitiuqI7Z1AuBUQ6aciI&usqp=CAU"
+            alt=""
+          />
+        </div>
 
-          <div className="lg:col-span-2 w-full">
-            {/* <h1 className="bg-red-400  text-center">Calender</h1> */}
-            <img
-              className="w-full rounded-3xl"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqwCdTyazWz5p-tztnsIDmKpwi6VoyNcaoZQwhIo6_v11fg9oefBwqCu8j-gx9aDVxweQ&usqp=CAU"
-              alt=""
-            />
-            {/* </div> */}
-          </div>
+        <div className="lg:col-span-2 lg:w-full md:w-full">
+          {/* <h1 className="bg-red-400  text-center">Calender</h1> */}
+          <img
+            className="w-full h-full rounded-3xl"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqwCdTyazWz5p-tztnsIDmKpwi6VoyNcaoZQwhIo6_v11fg9oefBwqCu8j-gx9aDVxweQ&usqp=CAU"
+            alt=""
+          />
+          {/* </div> */}
+        </div>
         {/* </div> */}
       </div>
       <div className=" ">
