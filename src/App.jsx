@@ -87,9 +87,9 @@ function App() {
         <ToDo></ToDo>
       </div>
 
-      <div className="">
-        <Callender></Callender>
-        </div>
+      {/* <div className="bg-white">
+        <Callender className=""></Callender>
+        </div> */}
     </div>
   );
 }
