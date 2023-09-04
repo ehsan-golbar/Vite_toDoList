@@ -45,11 +45,12 @@ function App() {
 
         <div className="lg:col-span-2 lg:w-full md:w-full">
           {/* <h1 className="bg-red-400  text-center">Calender</h1> */}
-          <img
+          <Callender></Callender>
+          {/* <img
             className="w-full h-full rounded-3xl"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqwCdTyazWz5p-tztnsIDmKpwi6VoyNcaoZQwhIo6_v11fg9oefBwqCu8j-gx9aDVxweQ&usqp=CAU"
             alt=""
-          />
+          /> */}
           {/* </div> */}
         </div>
         {/* </div> */}
