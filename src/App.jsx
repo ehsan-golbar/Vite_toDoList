@@ -70,7 +70,7 @@ function App() {
         <div><IconLink></IconLink></div>
         <div><IconLink></IconLink></div>
       </div>
-      <div className="text-center lg:col-span-1 md:col-span-2 sm:col-span-3">
+      <div className="flex justify-center h-min lg:col-span-1 md:col-span-2 sm:col-span-3 ">
         {/* <h1 className="bg-slate-600 ">To Do List </h1> */}
         <ToDo></ToDo>
       </div>
