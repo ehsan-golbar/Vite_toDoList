@@ -4,15 +4,16 @@ import "./index.css";
 import ToDo from "./components/ToDo.jsx";
 import GoogleSearch from "./components/GoogleSearch.jsx";
 import DateTime from "./components/DateTime.jsx";
+import IconLink from "./components/IconLink.jsx";
 
 function App() {
   return (
     <div className=" lg:grid  lg:grid-cols-3 md:flex md:flex-col flex flex-col gap-5 p-3">
-      <div className="lg:grid lg:grid-cols-2 gap-3 md:flex md:flex-row grid grid-cols-2 ">
+      <div className="lg:grid lg:grid-cols-2 gap-3 md:flex md:flex-row grid grid-cols-2">
         {/* <h1 className="bg-slate-600 text-center">Time </h1> */}
         {/* <div className=""> */}
 
-        <div className="md:w-full lg:w-40">
+        <div className="md:w-full lg:w-full">
           {/* <h1 className="bg-red-600 text-center">clock </h1> */}
           {/* <div className=" font-bold flex justify-center  ">17 : 46</div> */}
           <img
@@ -22,7 +23,7 @@ function App() {
           />
           {/* <DateTime flag="time"></DateTime> */}
         </div>
-        <div className="w-full md:w-full lg:w-40">
+        <div className="w-full md:w-full lg:w-full">
           {/* <h1 className="bg-yellow-600 text-center"> tempreture </h1> */}
           <img
             className="w-full rounded-3xl "
@@ -52,15 +53,19 @@ function App() {
         </div>
         {/* </div> */}
       </div>
-      <div className=" ">
+      <div className="lg:grid lg:grid-cols-3">
         {/* <h1 className="bg-slate-600 text-center">Search </h1> */}
-        <div className=" text-center">
+        
           {/* <h1 className="">Google</h1> */}
-          <div className="">
-            <GoogleSearch></GoogleSearch>
+          <div className = "lg:grid lg:col-span-3 lg:h-min">
+            <GoogleSearch ></GoogleSearch>
           </div>
           {/* <h1>Icons Link</h1> */}
-        </div>
+        
+
+        <div><IconLink></IconLink></div>
+        <div><IconLink></IconLink></div>
+        <div><IconLink></IconLink></div>
       </div>
       <div className="text-center lg:col-span-1 md:col-span-2 sm:col-span-3">
         {/* <h1 className="bg-slate-600 ">To Do List </h1> */}
