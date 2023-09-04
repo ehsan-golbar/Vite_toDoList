@@ -1,5 +1,7 @@
 # Add calender and to do list for every day 
     # add calender 
+        # install package 
+        # donlowd the component 
     # finding how it works 
     # pass the selected day to to do component 
     # have an map for taskList and special day 
