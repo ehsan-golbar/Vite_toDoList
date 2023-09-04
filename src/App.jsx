@@ -53,7 +53,7 @@ function App() {
         </div>
         {/* </div> */}
       </div>
-      <div className="lg:grid lg:grid-cols-3">
+      <div className="lg:grid lg:grid-cols-3 lg:h-min lg:gap-3">
         {/* <h1 className="bg-slate-600 text-center">Search </h1> */}
         
           {/* <h1 className="">Google</h1> */}
@@ -63,6 +63,9 @@ function App() {
           {/* <h1>Icons Link</h1> */}
         
 
+        <div><IconLink></IconLink></div>
+        <div><IconLink></IconLink></div>
+        <div><IconLink></IconLink></div>
         <div><IconLink></IconLink></div>
         <div><IconLink></IconLink></div>
         <div><IconLink></IconLink></div>
