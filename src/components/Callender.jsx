@@ -1,13 +1,12 @@
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import * as React from 'react';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-function Callender() {
+export default function Callender() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker></DatePicker>
+      <DatePicker />
     </LocalizationProvider>
   );
 }
-
-export default Callender;

@@ -5,7 +5,7 @@ import ToDo from "./components/ToDo.jsx";
 import GoogleSearch from "./components/GoogleSearch.jsx";
 import DateTime from "./components/DateTime.jsx";
 import IconLink from "./components/IconLink.jsx";
-// import Callender from "./components/Callender.jsx";
+import Callender from "./components/Callender.jsx";
 
 function App() {
   return (
@@ -87,8 +87,9 @@ function App() {
         <ToDo></ToDo>
       </div>
 
-
-      
+      <div className="">
+        <Callender></Callender>
+        </div>
     </div>
   );
 }
