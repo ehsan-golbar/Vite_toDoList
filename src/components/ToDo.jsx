@@ -20,6 +20,9 @@ function ToDo() {
       id: Math.random(),
       taskName: task,
     };
+    if (task == "") {
+      return
+    }
     setTasksList([...TasksList, newTask]);
     setUserTask("");
   };

@@ -8,7 +8,7 @@ import IconLink from "./components/IconLink.jsx";
 
 function App() {
   return (
-    <div className=" lg:grid  lg:grid-cols-3 md:flex md:flex-col flex flex-col gap-5 p-3 lg:pl-12 lg:pt-6  justify-center"> 
+    <div className=" lg:grid  lg:grid-cols-3 md:flex md:flex-col flex flex-col gap-5 p-3 lg:pl-12 lg:pt-6  justify-center">
       <div className="lg:grid lg:grid-cols-2 gap-3 md:flex md:flex-row grid grid-cols-2">
         {/* <h1 className="bg-slate-600 text-center">Time </h1> */}
         {/* <div className=""> */}
@@ -55,24 +55,31 @@ function App() {
       </div>
       <div className="lg:grid lg:grid-cols-3 lg:h-min lg:gap-3 md:grid md:grid-cols-3 md:h-min md:gap-3 grid grid-cols-3 h-min gap-3">
         {/* <h1 className="bg-slate-600 text-center">Search </h1> */}
-        
-          {/* <h1 className="">Google</h1> */}
-          <div className = "lg:grid lg:col-span-3 lg:h-min md:grid md:col-span-3 md:h-min grid col-span-3 h-min">
-            <GoogleSearch ></GoogleSearch>
-          </div>
-          {/* <h1>Icons Link</h1> */}
-        
-    
-          
-        <div><IconLink></IconLink></div>
-        <div><IconLink></IconLink></div>
-        <div><IconLink></IconLink></div>
-        <div><IconLink></IconLink></div>
-        <div><IconLink></IconLink></div>
-        <div><IconLink></IconLink></div>
-        
 
+        {/* <h1 className="">Google</h1> */}
+        <div className="lg:grid lg:col-span-3 lg:h-min md:grid md:col-span-3 md:h-min grid col-span-3 h-min">
+          <GoogleSearch></GoogleSearch>
+        </div>
+        {/* <h1>Icons Link</h1> */}
 
+        <div>
+          <IconLink></IconLink>
+        </div>
+        <div>
+          <IconLink></IconLink>
+        </div>
+        <div>
+          <IconLink></IconLink>
+        </div>
+        <div>
+          <IconLink></IconLink>
+        </div>
+        <div>
+          <IconLink></IconLink>
+        </div>
+        <div>
+          <IconLink></IconLink>
+        </div>
       </div>
       <div className=" h-min lg:col-span-1 md:col-span-2  lg:w-min">
         {/* <h1 className="bg-slate-600 ">To Do List </h1> */}
