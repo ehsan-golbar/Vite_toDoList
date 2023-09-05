@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../index.css";
-
-function ToDo() {
+import dayjs from 'dayjs';
+function ToDo({selectedDate}) {
   const initialTasks = () => {
     let getTasks = localStorage.getItem("taskdata");
     return getTasks ? JSON.parse(getTasks) : [];
@@ -36,7 +36,7 @@ function ToDo() {
     <div className="grid justify-items-center bg-white rounded-3xl">
       <div className="p-3">
         <h1 className="text-6xl font-bold text-center"> To Do List </h1>
-        <h1 className="pt-4 font-bold">12 May 2022</h1>
+        <h1 className="pt-4 font-bold">{selectedDate.format("DD MMMM YYYY")}</h1>
         <div className="flex space-x-5 mt-6">
           <input
             type="text"

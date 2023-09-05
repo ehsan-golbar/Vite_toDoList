@@ -88,7 +88,7 @@ function App() {
       </div>
       <div className=" h-min lg:col-span-1 md:col-span-2  lg:w-min">
         {/* <h1 className="bg-slate-600 ">To Do List </h1> */}
-        <ToDo></ToDo>
+        <ToDo selectedDate = {date}></ToDo>
       </div>
 
       {/* <div className="bg-white">
