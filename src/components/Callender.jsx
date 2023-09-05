@@ -8,9 +8,9 @@ import dayjs from 'dayjs';
 
 export default function Callender({date,setDate }) {
   // const [date, setData ] = useState(dayjs("2022-04-17"))
-  useEffect(()=>{
-    console.log(date.format("YYYY/MM/DD"))
-  })
+  // useEffect(()=>{
+  //   console.log(date.format("DD MMM YYYY"))
+  // })
   
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

@@ -36,7 +36,7 @@ function ToDo() {
     <div className="grid justify-items-center bg-white rounded-3xl">
       <div className="p-3">
         <h1 className="text-6xl font-bold text-center"> To Do List </h1>
-
+        <h1 className="pt-4 font-bold">12 May 2022</h1>
         <div className="flex space-x-5 mt-6">
           <input
             type="text"
