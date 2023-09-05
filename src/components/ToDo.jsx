@@ -1,17 +1,40 @@
 import { useState, useEffect } from "react";
 import "../index.css";
 import dayjs from 'dayjs';
+let taskMap = new Map();
 function ToDo({selectedDate}) {
+
+  
   const initialTasks = () => {
     let getTasks = localStorage.getItem("taskdata");
+    //console.log("here")
     return getTasks ? JSON.parse(getTasks) : [];
   };
 
   const [userTask, setUserTask] = useState("");
   const [TasksList, setTasksList] = useState(initialTasks);
+  
+  const[todayDate, setTodayDate] = useState(selectedDate)
+
+
+  useEffect(()=>{
+      
+      let tempList = [...TasksList ]
+      taskMap.set(todayDate.format("DD MMMM YYYY"), tempList)
+    
+      // const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY"))
+      
+      // setTasksList(  todayList != null ? todayList : [])
+      setTodayDate(selectedDate)
+      setTasksList([])
+      console.log(taskMap)
+      
+      
+      
+  }, [selectedDate])
 
   useEffect(() => {
-    console.log(TasksList);
+    //console.log(TasksList);
     localStorage.setItem("taskdata", JSON.stringify(TasksList));
   }, [TasksList]);
 
@@ -36,7 +59,7 @@ function ToDo({selectedDate}) {
     <div className="grid justify-items-center bg-white rounded-3xl">
       <div className="p-3">
         <h1 className="text-6xl font-bold text-center"> To Do List </h1>
-        <h1 className="pt-4 font-bold">{selectedDate.format("DD MMMM YYYY")}</h1>
+        <h1 className="pt-6 font-bold">{selectedDate.format("DD MMMM YYYY")}</h1>
         <div className="flex space-x-5 mt-6">
           <input
             type="text"
