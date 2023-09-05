@@ -43,9 +43,9 @@ function App() {
           />
         </div>
 
-        <div className="lg:col-span-2 lg:w-full md:w-full">
+        <div className="lg:col-span-2 lg:w-full md:w-full bg-white rounded-3xl">
           {/* <h1 className="bg-red-400  text-center">Calender</h1> */}
-          <Callender></Callender>
+          <Callender ></Callender>
           {/* <img
             className="w-full h-full rounded-3xl"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqwCdTyazWz5p-tztnsIDmKpwi6VoyNcaoZQwhIo6_v11fg9oefBwqCu8j-gx9aDVxweQ&usqp=CAU"
