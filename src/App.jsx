@@ -6,8 +6,11 @@ import GoogleSearch from "./components/GoogleSearch.jsx";
 import DateTime from "./components/DateTime.jsx";
 import IconLink from "./components/IconLink.jsx";
 import Callender from "./components/Callender.jsx";
+import dayjs from 'dayjs';
+import { data } from "autoprefixer";
 
 function App() {
+  const [date, setDate ] = useState(dayjs("2022-04-17"))
   return (
     <div className=" lg:grid  lg:grid-cols-3 md:flex md:flex-col flex flex-col gap-5 p-3 lg:pl-12 lg:pt-6  justify-center">
       <div className="lg:grid lg:grid-cols-2 gap-3 md:flex md:flex-row grid grid-cols-2">
@@ -45,7 +48,7 @@ function App() {
 
         <div className="lg:col-span-2 lg:w-full md:w-full bg-white rounded-3xl">
           {/* <h1 className="bg-red-400  text-center">Calender</h1> */}
-          <Callender ></Callender>
+          <Callender setDate = {setDate} date = {date}></Callender>
           {/* <img
             className="w-full h-full rounded-3xl"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqwCdTyazWz5p-tztnsIDmKpwi6VoyNcaoZQwhIo6_v11fg9oefBwqCu8j-gx9aDVxweQ&usqp=CAU"

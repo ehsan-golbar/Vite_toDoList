@@ -6,15 +6,15 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 
-export default function Callender() {
-  const [date, setData ] = useState(dayjs("2022-04-17"))
-  // useEffect(()=>{
-  //   console.log(date.format("YYYY/MM/DD"))
-  // })
+export default function Callender({date,setDate }) {
+  // const [date, setData ] = useState(dayjs("2022-04-17"))
+  useEffect(()=>{
+    console.log(date.format("YYYY/MM/DD"))
+  })
   
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar value={date} onChange={(e) => setData(e)}/>
+      <DateCalendar value={date} onChange={(e) => setDate(e)}/>
     </LocalizationProvider>
   );
 }
