@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import "../index.css";
 import dayjs from 'dayjs';
-let taskMap = new Map();
+
+let taskMap = new Map(JSON.parse(localStorage.getItem('maplist')));
+// let getMap = localStorage.getItem("maplist")
+// if ( getMap !== null ){
+//    taskMap = JSON.parse(getMap)
+// }
+
 function ToDo({selectedDate}) {
 
   
@@ -23,6 +29,7 @@ function ToDo({selectedDate}) {
       taskMap.set(todayDate.format("DD MMMM YYYY"), TasksList)
     
       const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
+      localStorage.setItem("maplist", JSON.stringify([...taskMap]));
        const updatedList = todayList !== undefined ? todayList : []
        setTodayDate(selectedDate)
       
