@@ -19,14 +19,15 @@ function ToDo({selectedDate}) {
 
   useEffect(()=>{
       
-      let tempList = [...TasksList ]
-      taskMap.set(todayDate.format("DD MMMM YYYY"), tempList)
+      // let tempList = [...TasksList ]
+      taskMap.set(todayDate.format("DD MMMM YYYY"), TasksList)
     
-      // const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY"))
+      const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
+       const updatedList = todayList !== undefined ? todayList : []
+       setTodayDate(selectedDate)
       
-      // setTasksList(  todayList != null ? todayList : [])
-      setTodayDate(selectedDate)
-      setTasksList([])
+      setTasksList( updatedList )
+      // setTasksList([])
       console.log(taskMap)
       
       
