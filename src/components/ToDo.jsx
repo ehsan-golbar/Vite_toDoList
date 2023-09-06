@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import "../index.css";
 import dayjs from 'dayjs';
 
-let taskMap = new Map(JSON.parse(localStorage.getItem('maplist')));
+// let taskMap = new Map(JSON.parse(localStorage.getItem('maplist')));
+// let taskMap = new Map();
 // let getMap = localStorage.getItem("maplist")
 // if ( getMap !== null ){
 //    taskMap = JSON.parse(getMap)
@@ -11,20 +12,21 @@ let taskMap = new Map(JSON.parse(localStorage.getItem('maplist')));
 function ToDo({selectedDate}) {
 
   
-  const initialTasks = () => {
-    let getTasks = localStorage.getItem("taskdata");
-    //console.log("here")
-    return getTasks ? JSON.parse(getTasks) : [];
-  };
+  // const initialMaps = () => {
+  //   let getTasks = localStorage.getItem("taskdata");
+  //   //console.log("here")
+  //   return getTasks ? JSON.parse(getTasks) : [];
+  // };
  
   // const updateList = () => {
   //   const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
   //   const updatedList = todayList !== undefined ? todayList : []
   //   setTasksList( updatedList )
   // }
-  const [todayDate, setTodayDate] = useState(selectedDate)
+  // const [todayDate, setTodayDate] = useState(selectedDate)
   const [userTask, setUserTask] = useState("");
-  const [TasksList, setTasksList] = useState(initialTasks);
+  const [ taskMap, setTaskMap ] = useState(new Map())
+  // const [TasksList, setTasksList] = useState(initialTasks);
   
 
 
@@ -32,15 +34,15 @@ function ToDo({selectedDate}) {
   useEffect(()=>{
       
       // let tempList = [...TasksList ]
-      taskMap.set(todayDate.format("DD MMMM YYYY"), TasksList)
+      // taskMap.set(selectedDate.format("DD MMMM YYYY"), [])
+      let getTasks = taskMap.get(selectedDate.format("DD MMMM YYYY")) !== undefined ? taskMap.get(selectedDate.format("DD MMMM YYYY")) : []
+      setTaskMap((map) => { return new Map(map.set(selectedDate.format("DD MMMM YYYY"), getTasks))})
     
-      const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
-      localStorage.setItem("maplist", JSON.stringify([...taskMap]));
-       const updatedList = todayList !== undefined ? todayList : []
-       setTasksList( updatedList )
-       setTodayDate(selectedDate)
-      
-      
+      // const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
+      // localStorage.setItem("maplist", JSON.stringify([...taskMap]));
+      //  const updatedList = todayList !== undefined ? todayList : []
+      //  setTasksList( updatedList )
+      //  setTodayDate(selectedDate)
       // setTasksList([])
       console.log(taskMap)
       
@@ -48,10 +50,10 @@ function ToDo({selectedDate}) {
       
   }, [selectedDate])
 
-  useEffect(() => {
-    //console.log(TasksList);
-    localStorage.setItem("taskdata", JSON.stringify(TasksList));
-  }, [TasksList]);
+  // useEffect(() => {
+  //   //console.log(TasksList);
+  //   localStorage.setItem("taskdata", JSON.stringify(TasksList));
+  // }, [TasksList]);
 
   const creatTask = (task) => {
     const newTask = {
@@ -61,16 +63,27 @@ function ToDo({selectedDate}) {
     if (task == "") {
       return
     }
-    setTasksList([...TasksList, newTask]);
+
+    // taskMap.get(selectedDate.format("DD MMMM YYYY")).push(newTask)
+    let temp = [...taskMap.get(selectedDate.format("DD MMMM YYYY")), newTask]
+    setTaskMap( (map) => {
+      return new Map( map.set(selectedDate.format("DD MMMM YYYY"), temp ))
+    } )
+    // setTasksList([...TasksList, newTask]);
     
 
-
+    console.log(taskMap)
     setUserTask("");
   };
 
   const deleteTask = (id) => {
-    const tempList = TasksList.filter((task) => task.id !== id);
-    setTasksList(tempList);
+    let currentList = taskMap.get(selectedDate.format("DD MMMM YYYY"))
+    // taskMap.set(selectedDate.format("DD MMMM YYYY"),  currentList.filter((task) => task.id !== id))
+    setTaskMap( (map) => {
+     return new Map( map.set(selectedDate.format("DD MMMM YYYY"), map.get(selectedDate.format("DD MMMM YYYY")).filter((task) => task.id !== id) ))
+    } )
+    console.log(taskMap)
+    // setTasksList(tempList);
   };
 
   return (
@@ -101,7 +114,7 @@ function ToDo({selectedDate}) {
           </button>
         </div>
         <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          {TasksList.map((task) => (
+          { (taskMap.get(selectedDate.format("DD MMMM YYYY")) !== undefined ) && taskMap.get(selectedDate.format("DD MMMM YYYY")).map((task) => (
             <div className="p-1">
               <li key={task.id} className="flex justify-between space-x-5">
                 <label className="text-2xl text-center break-words">
