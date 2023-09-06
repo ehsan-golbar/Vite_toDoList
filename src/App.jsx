@@ -32,7 +32,7 @@ function App() {
         {/* <h1 className="bg-slate-600 text-center">Time </h1> */}
         {/* <div className=""> */}
 
-        <div className="md:w-full lg:w-full ">
+        <div className="md:w-full lg:w-full md:flex md:items-center">
           {/* <h1 className="bg-red-600 text-center">clock </h1> */}
           {/* <div className=" font-bold flex justify-center  ">17 : 46</div> */}
           <img
@@ -42,7 +42,7 @@ function App() {
           />
           {/* <DateTime flag="time"></DateTime> */}
         </div>
-        <div className=" md:w-full lg:w-full">
+        <div className=" md:w-full lg:w-full md:flex md:items-center">
           {/* <h1 className="bg-yellow-600 text-center"> tempreture </h1> */}
           <img
             className="min-w-full rounded-3xl "
@@ -52,10 +52,10 @@ function App() {
         </div>
 
         {/* <div className="col-span-2 space-y-3 md:col-span-2 md:flow-col"> */}
-        <div className="lg:col-span-2 w-full md:w-full lg:w-full max-h-full object-cover ">
+        <div className="lg:col-span-2 w-full md:w-full lg:w-full max-h-full object-cover md:flex md:items-center flex items-center">
           {/* <h1 className="bg-gray-700  text-center">date of today</h1> */}
           <img
-            className="w-full h-full rounded-3xl"
+            className="w-full md:h-max rounded-3xl"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSbNPH3g6gHXKzBPQn_PnYyr8bWw3hc4xfBmkVzQMNjO-P0mQmitiuqI7Z1AuBUQ6aciI&usqp=CAU"
             alt=""
           />
