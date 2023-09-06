@@ -25,7 +25,7 @@ function ToDo({selectedDate}) {
   // }
   // const [todayDate, setTodayDate] = useState(selectedDate)
   const [userTask, setUserTask] = useState("");
-  const [ taskMap, setTaskMap ] = useState(new Map())
+  const [ taskMap, setTaskMap ] = useState(new Map(JSON.parse(localStorage.getItem('taskmap'))))
   // const [TasksList, setTasksList] = useState(initialTasks);
   
 
@@ -50,10 +50,11 @@ function ToDo({selectedDate}) {
       
   }, [selectedDate])
 
-  // useEffect(() => {
-  //   //console.log(TasksList);
-  //   localStorage.setItem("taskdata", JSON.stringify(TasksList));
-  // }, [TasksList]);
+  useEffect(() => {
+    //console.log(TasksList);
+    localStorage.setItem("taskmap", JSON.stringify([...taskMap]));
+  }, [taskMap]);
+
 
   const creatTask = (task) => {
     const newTask = {
