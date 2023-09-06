@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./index.css";
 import ToDo from "./components/ToDo.jsx";
@@ -8,9 +8,24 @@ import IconLink from "./components/IconLink.jsx";
 import Callender from "./components/Callender.jsx";
 import dayjs from 'dayjs';
 import { data } from "autoprefixer";
+import { stringify } from "postcss";
 
 function App() {
-  const [date, setDate ] = useState(dayjs("2022-04-17"))
+  // const [date, setDate ] = useState(dayjs("2022-04-17"))
+
+
+  // const initailDate = () => {
+  //   const getdate = localStorage.getItem("todaydate")
+  //   return (getdate !== null ) ?  dayjs(getdate) : dayjs() 
+  // }
+
+  const [date, setDate ] = useState(dayjs())
+
+  // useEffect(()=>{
+  //   localStorage.setItem("todaydate", JSON.stringify(date) )
+
+  // },[date])
+
   return (
     <div className=" lg:grid  lg:grid-cols-3 md:flex md:flex-col flex flex-col gap-5 p-3 lg:pl-12 lg:pt-6  justify-center">
       <div className="lg:grid lg:grid-cols-2 gap-3 md:flex md:flex-row grid grid-cols-2">

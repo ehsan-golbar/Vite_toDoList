@@ -16,11 +16,17 @@ function ToDo({selectedDate}) {
     //console.log("here")
     return getTasks ? JSON.parse(getTasks) : [];
   };
-
+ 
+  // const updateList = () => {
+  //   const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
+  //   const updatedList = todayList !== undefined ? todayList : []
+  //   setTasksList( updatedList )
+  // }
+  const [todayDate, setTodayDate] = useState(selectedDate)
   const [userTask, setUserTask] = useState("");
   const [TasksList, setTasksList] = useState(initialTasks);
   
-  const[todayDate, setTodayDate] = useState(selectedDate)
+
 
 
   useEffect(()=>{
@@ -31,9 +37,10 @@ function ToDo({selectedDate}) {
       const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
       localStorage.setItem("maplist", JSON.stringify([...taskMap]));
        const updatedList = todayList !== undefined ? todayList : []
+       setTasksList( updatedList )
        setTodayDate(selectedDate)
       
-      setTasksList( updatedList )
+      
       // setTasksList([])
       console.log(taskMap)
       
@@ -55,6 +62,9 @@ function ToDo({selectedDate}) {
       return
     }
     setTasksList([...TasksList, newTask]);
+    
+
+
     setUserTask("");
   };
 
