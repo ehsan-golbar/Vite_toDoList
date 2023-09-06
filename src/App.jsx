@@ -61,7 +61,7 @@ function App() {
           />
         </div>
 
-        <div className="lg:col-span-2 lg:w-full md:w-full bg-white rounded-3xl">
+        <div className="lg:col-span-2 lg:w-min md:w-full bg-white rounded-3xl w-min">
           {/* <h1 className="bg-red-400  text-center">Calender</h1> */}
           <Callender setDate = {setDate} date = {date}></Callender>
           {/* <img
