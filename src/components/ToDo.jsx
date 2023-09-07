@@ -1,60 +1,29 @@
 import { useState, useEffect } from "react";
 import "../index.css";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
-// let taskMap = new Map(JSON.parse(localStorage.getItem('maplist')));
-// let taskMap = new Map();
-// let getMap = localStorage.getItem("maplist")
-// if ( getMap !== null ){
-//    taskMap = JSON.parse(getMap)
-// }
-
-function ToDo({selectedDate}) {
-
-  
-  // const initialMaps = () => {
-  //   let getTasks = localStorage.getItem("taskdata");
-  //   //console.log("here")
-  //   return getTasks ? JSON.parse(getTasks) : [];
-  // };
- 
-  // const updateList = () => {
-  //   const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
-  //   const updatedList = todayList !== undefined ? todayList : []
-  //   setTasksList( updatedList )
-  // }
-  // const [todayDate, setTodayDate] = useState(selectedDate)
+function ToDo({ selectedDate }) {
   const [userTask, setUserTask] = useState("");
-  const [ taskMap, setTaskMap ] = useState(new Map(JSON.parse(localStorage.getItem('taskmap'))))
-  // const [TasksList, setTasksList] = useState(initialTasks);
-  
+  const [taskMap, setTaskMap] = useState(
+    new Map(JSON.parse(localStorage.getItem("taskmap")))
+  );
 
+  useEffect(() => {
+    let getTasks =
+      taskMap.get(selectedDate.format("DD MMMM YYYY")) !== undefined
+        ? taskMap.get(selectedDate.format("DD MMMM YYYY"))
+        : [];
+    setTaskMap((map) => {
+      return new Map(map.set(selectedDate.format("DD MMMM YYYY"), getTasks));
+    });
 
-
-  useEffect(()=>{
-      
-      // let tempList = [...TasksList ]
-      // taskMap.set(selectedDate.format("DD MMMM YYYY"), [])
-      let getTasks = taskMap.get(selectedDate.format("DD MMMM YYYY")) !== undefined ? taskMap.get(selectedDate.format("DD MMMM YYYY")) : []
-      setTaskMap((map) => { return new Map(map.set(selectedDate.format("DD MMMM YYYY"), getTasks))})
-    
-      // const todayList = taskMap.get(selectedDate.format("DD MMMM YYYY")) 
-      // localStorage.setItem("maplist", JSON.stringify([...taskMap]));
-      //  const updatedList = todayList !== undefined ? todayList : []
-      //  setTasksList( updatedList )
-      //  setTodayDate(selectedDate)
-      // setTasksList([])
-      console.log(taskMap)
-      
-      
-      
-  }, [selectedDate])
+    //console.log(taskMap)
+  }, [selectedDate]);
 
   useEffect(() => {
     //console.log(TasksList);
     localStorage.setItem("taskmap", JSON.stringify([...taskMap]));
   }, [taskMap]);
-
 
   const creatTask = (task) => {
     const newTask = {
@@ -62,36 +31,44 @@ function ToDo({selectedDate}) {
       taskName: task,
     };
     if (task == "") {
-      return
+      return;
     }
 
     // taskMap.get(selectedDate.format("DD MMMM YYYY")).push(newTask)
-    let temp = [...taskMap.get(selectedDate.format("DD MMMM YYYY")), newTask]
-    setTaskMap( (map) => {
-      return new Map( map.set(selectedDate.format("DD MMMM YYYY"), temp ))
-    } )
+    let temp = [...taskMap.get(selectedDate.format("DD MMMM YYYY")), newTask];
+    setTaskMap((map) => {
+      return new Map(map.set(selectedDate.format("DD MMMM YYYY"), temp));
+    });
     // setTasksList([...TasksList, newTask]);
-    
 
-    console.log(taskMap)
+    // console.log(taskMap)
     setUserTask("");
   };
 
   const deleteTask = (id) => {
-    let currentList = taskMap.get(selectedDate.format("DD MMMM YYYY"))
+    let currentList = taskMap.get(selectedDate.format("DD MMMM YYYY"));
     // taskMap.set(selectedDate.format("DD MMMM YYYY"),  currentList.filter((task) => task.id !== id))
-    setTaskMap( (map) => {
-     return new Map( map.set(selectedDate.format("DD MMMM YYYY"), map.get(selectedDate.format("DD MMMM YYYY")).filter((task) => task.id !== id) ))
-    } )
-    console.log(taskMap)
+    setTaskMap((map) => {
+      return new Map(
+        map.set(
+          selectedDate.format("DD MMMM YYYY"),
+          map
+            .get(selectedDate.format("DD MMMM YYYY"))
+            .filter((task) => task.id !== id)
+        )
+      );
+    });
+    console.log(taskMap);
     // setTasksList(tempList);
   };
 
   return (
-    <div className="grid justify-items-center bg-white rounded-3xl">
+    <div className="grid justify-items-center bg-white rounded-3xl relative">
       <div className="p-3">
         <h1 className="text-6xl font-bold text-center"> To Do List </h1>
-        <h1 className="pt-6 font-bold">{selectedDate.format("DD MMMM YYYY")}</h1>
+        <h1 className="pt-6 font-bold">
+          {selectedDate.format("DD MMMM YYYY")}
+        </h1>
         <div className="flex space-x-5 mt-6">
           <input
             type="text"
@@ -115,36 +92,37 @@ function ToDo({selectedDate}) {
           </button>
         </div>
         <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          { (taskMap.get(selectedDate.format("DD MMMM YYYY")) !== undefined ) && taskMap.get(selectedDate.format("DD MMMM YYYY")).map((task) => (
-            <div className="p-1">
-              <li key={task.id} className="flex justify-between space-x-5">
-                <label className="text-2xl text-center break-words">
-                  {task.taskName}
-                </label>
-                <button
-                  type="button"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3"
-                  onClick={() => deleteTask(task.id)}
-                >
-                  <svg
-                    className="w-6 h-6 text-white dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 16 12"
+          {taskMap.get(selectedDate.format("DD MMMM YYYY")) !== undefined &&
+            taskMap.get(selectedDate.format("DD MMMM YYYY")).map((task) => (
+              <div className="p-1">
+                <li key={task.id} className="flex justify-between space-x-5">
+                  <label className="text-2xl text-center break-words">
+                    {task.taskName}
+                  </label>
+                  <button
+                    type="button"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3"
+                    onClick={() => deleteTask(task.id)}
                   >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M1 5.917 5.724 10.5 15 1.5"
-                    />
-                  </svg>
-                </button>{" "}
-              </li>
-            </div>
-          ))}
+                    <svg
+                      className="w-6 h-6 text-white dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 16 12"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M1 5.917 5.724 10.5 15 1.5"
+                      />
+                    </svg>
+                  </button>{" "}
+                </li>
+              </div>
+            ))}
         </ul>
       </div>
     </div>
