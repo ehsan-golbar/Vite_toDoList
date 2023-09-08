@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <div className="lg:flex lg:flex-row lg:gap-x-5 lg:pl-14 lg:pr-14 lg:pt-5 lg:justify-around md:hidden hidden">
+      <div className="lg:flex lg:flex-row lg:gap-x-5 lg:ml-14 lg:mr-14 lg:mt-5 lg:justify-around md:hidden hidden">
         {/* time section */}
         <div className="lg:flex lg:flex-col lg:gap-4 lg:w-min">
           <div className="lg:flex lg:flex-row lg:gap-x-4 ">
@@ -51,7 +51,7 @@ function App() {
         </div>
         {/*search*/}
         <div>
-          <div className="lg:w-96">
+          <div className="lg:w-full">
             <GoogleSearch></GoogleSearch>
           </div>
           <div className="lg:grid lg:grid-cols-3 lg:gap-4 lg:pt-4">
