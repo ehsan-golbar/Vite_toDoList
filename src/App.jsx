@@ -210,7 +210,7 @@ function App() {
         <div className="bg-white rounded-3xl  sm:hidden m-auto ">
             <Callender setDate={setDate} date={date}></Callender>
           </div>
-        <div className="flex justify-center  ">
+        <div className="flex justify-center">
           <ToDo selectedDate={date}></ToDo>
         </div>
       </div>
