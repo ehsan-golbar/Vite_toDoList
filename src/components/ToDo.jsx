@@ -63,7 +63,7 @@ function ToDo({ selectedDate }) {
   };
 
   return (
-    <div className="grid justify-items-center bg-white rounded-3xl relative">
+    <div className="grid justify-items-center bg-white rounded-3xl relative ">
       <div className="p-3">
         <h1 className="text-6xl font-bold text-center"> To Do List </h1>
         <h1 className="pt-6 font-bold">

@@ -14,7 +14,7 @@ export default function Callender({date,setDate }) {
   
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar value={date} onChange={(e) => setDate(e)}/>
+      <DateCalendar value={date} onChange={(e) => setDate(e)} />
     </LocalizationProvider>
   );
 }
