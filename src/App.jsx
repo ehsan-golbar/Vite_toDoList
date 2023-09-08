@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <div className="lg:flex lg:flex-row lg:gap-x-5 lg:ml-14 lg:mr-14 lg:mt-5 lg:justify-around md:hidden hidden">
+      <div className="lg:flex lg:flex-row lg:gap-x-5 lg:ml-14 lg:mr-14 lg:mt-5 lg:justify-center md:hidden hidden">
         {/* time section */}
         <div className="lg:flex lg:flex-col lg:gap-4 lg:w-min">
           <div className="lg:flex lg:flex-row lg:gap-x-4 ">
