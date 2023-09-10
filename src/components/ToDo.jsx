@@ -1,15 +1,30 @@
 import { useState, useEffect } from "react";
 import "../index.css";
 import dayjs from "dayjs";
+import { supabase } from "../supabase";
 
 function ToDo({ selectedDate }) {
   const [userTask, setUserTask] = useState("");
   const [taskMap, setTaskMap] = useState(
     new Map(JSON.parse(localStorage.getItem("taskmap")))
   );
-    const [todayDate, setTodayDate] = useState(selectedDate)
-  useEffect(() => {
+  const [todayDate, setTodayDate] = useState(selectedDate);
+  const [temp, setTemp] = useState(null);
 
+  async function fetchData() {
+    let { data: tasks, error } = await supabase.from("tasks").select();
+    
+    console.log(tasks)
+
+  }
+  useEffect(() =>{
+    fetchData()
+    
+  }, [])
+
+
+
+  useEffect(() => {
     // ((taskMap.get(todayDate.format("DD MMMM YYYY")) == [] ) && setTaskMap((map) => {
     //   return new Map( map.delete(todayDate.format("DD MMMM YYYY")) )
     // }) )
@@ -18,15 +33,16 @@ function ToDo({ selectedDate }) {
     //     ? taskMap.get(selectedDate.format("DD MMMM YYYY"))
     //     : [];
 
-        (taskMap.get(selectedDate.format("DD MMMM YYYY")) === undefined && setTaskMap((map) => {
-          return new Map(map.set(selectedDate.format("DD MMMM YYYY"), []));
-        }) ) 
+    taskMap.get(selectedDate.format("DD MMMM YYYY")) === undefined &&
+      setTaskMap((map) => {
+        return new Map(map.set(selectedDate.format("DD MMMM YYYY"), []));
+      });
     // setTaskMap((map) => {
     //   return new Map(map.set(selectedDate.format("DD MMMM YYYY"), getTasks));
     // });
     // console.log(todayDate.format("DD MMMM YYYY"))
     // console.log(taskMap)
-    setTodayDate(selectedDate)
+    setTodayDate(selectedDate);
     //console.log(taskMap)
   }, [selectedDate]);
 
@@ -69,7 +85,7 @@ function ToDo({ selectedDate }) {
         )
       );
     });
-    console.log(taskMap);
+   
     // setTasksList(tempList);
   };
 
@@ -136,6 +152,7 @@ function ToDo({ selectedDate }) {
             ))}
         </ul>
       </div>
+      {/* <div className="bg-slate-600">hello {temp}</div> */}
     </div>
   );
 }
