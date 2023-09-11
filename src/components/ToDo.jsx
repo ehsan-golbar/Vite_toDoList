@@ -77,7 +77,7 @@ function ToDo({ selectedDate }) {
     // setUserTask("");
   };
 
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
     // let currentList = taskMap.get(selectedDate.format("DD MMMM YYYY"));
     // // taskMap.set(selectedDate.format("DD MMMM YYYY"),  currentList.filter((task) => task.id !== id))
     // setTaskMap((map) => {
@@ -92,6 +92,10 @@ function ToDo({ selectedDate }) {
     // });
    
     // setTasksList(tempList);
+    const { error } = await supabase
+  .from('tasks')
+  .delete()
+  .eq('id', id)
   };
 
   return (
