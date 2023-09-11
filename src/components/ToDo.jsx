@@ -11,14 +11,23 @@ function ToDo({ selectedDate }) {
   const [todayDate, setTodayDate] = useState(selectedDate);
   const [temp, setTemp] = useState(null);
 
-  async function fetchData() {
-    let { data: tasks, error } = await supabase.from("tasks").select();
+  // async function fetchData() {
+  //   let { data: tasks, error } = await supabase.from("tasks").select();
     
-    console.log(tasks)
+  //   console.log(tasks)
 
+  // }
+
+  async function insertData (){
+    const { error } = await supabase
+  .from('tasks')
+   .insert({id: 23, text : 'from local'})
+  console.log(error)
   }
+
   useEffect(() =>{
-    fetchData()
+    // fetchData()
+    insertData()
     
   }, [])
 
