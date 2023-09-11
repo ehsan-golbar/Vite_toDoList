@@ -34,25 +34,15 @@ function ToDo({ selectedDate }) {
 
 
   useEffect(() => {
-    // ((taskMap.get(todayDate.format("DD MMMM YYYY")) == [] ) && setTaskMap((map) => {
-    //   return new Map( map.delete(todayDate.format("DD MMMM YYYY")) )
-    // }) )
-    // let getTasks =
-    //   taskMap.get(selectedDate.format("DD MMMM YYYY")) !== undefined
-    //     ? taskMap.get(selectedDate.format("DD MMMM YYYY"))
-    //     : [];
+
 
     taskMap.get(selectedDate.format("DD MMMM YYYY")) === undefined &&
       setTaskMap((map) => {
         return new Map(map.set(selectedDate.format("DD MMMM YYYY"), []));
       });
-    // setTaskMap((map) => {
-    //   return new Map(map.set(selectedDate.format("DD MMMM YYYY"), getTasks));
-    // });
-    // console.log(todayDate.format("DD MMMM YYYY"))
-    // console.log(taskMap)
+
     setTodayDate(selectedDate);
-    //console.log(taskMap)
+
   }, [selectedDate]);
 
   useEffect(() => {
