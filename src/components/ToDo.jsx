@@ -5,85 +5,91 @@ import { supabase } from "../supabase";
 
 function ToDo({ selectedDate }) {
   const [userTask, setUserTask] = useState("");
-  const [taskMap, setTaskMap] = useState(
-    new Map(JSON.parse(localStorage.getItem("taskmap")))
-  );
+  // const [taskMap, setTaskMap] = useState(
+  //   new Map(JSON.parse(localStorage.getItem("taskmap")))
+  // );
+  // const [taskMap, setTaskMap] = useState(
+  //   new Map()
+  // );
+
+  const[taskList, setTaskList] = useState([])
   const [todayDate, setTodayDate] = useState(selectedDate);
   const [temp, setTemp] = useState(null);
 
-  // async function fetchData() {
-  //   let { data: tasks, error } = await supabase.from("tasks").select();
+  async function fetchData() {
+    let { data: tasks, error } = await supabase.from("tasks").select();
     
-  //   console.log(tasks)
+    console.log(tasks)
+    setTaskList(tasks)
 
-  // }
-
-  async function insertData (){
-    const { error } = await supabase
-  .from('tasks')
-   .insert({id: 23, text : 'from local'})
-  console.log(error)
   }
 
+  // async function insertData (){
+  //   const { error } = await supabase
+  // .from('tasks')
+  //  .insert({id: 23, text : 'from local'})
+  // console.log(error)
+  // }
+
   useEffect(() =>{
-    // fetchData()
-    insertData()
+    fetchData()
+    // insertData()
     
   }, [])
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
 
-    taskMap.get(selectedDate.format("DD MMMM YYYY")) === undefined &&
-      setTaskMap((map) => {
-        return new Map(map.set(selectedDate.format("DD MMMM YYYY"), []));
-      });
+  //   taskMap.get(selectedDate.format("DD MMMM YYYY")) === undefined &&
+  //     setTaskMap((map) => {
+  //       return new Map(map.set(selectedDate.format("DD MMMM YYYY"), []));
+  //     });
 
-    setTodayDate(selectedDate);
+  //   setTodayDate(selectedDate);
 
-  }, [selectedDate]);
+  // }, [selectedDate]);
 
-  useEffect(() => {
-    //console.log(TasksList);
-    localStorage.setItem("taskmap", JSON.stringify([...taskMap]));
-    // console.log('here')
-  }, [taskMap]);
+  // useEffect(() => {
+  //   //console.log(TasksList);
+  //   localStorage.setItem("taskmap", JSON.stringify([...taskMap]));
+  //   // console.log('here')
+  // }, [taskMap]);
 
   const creatTask = (task) => {
-    const newTask = {
-      id: Math.random(),
-      taskName: task,
-    };
-    if (task == "") {
-      return;
-    }
+    // const newTask = {
+    //   id: Math.random(),
+    //   taskName: task,
+    // };
+    // if (task == "") {
+    //   return;
+    // }
 
-    // taskMap.get(selectedDate.format("DD MMMM YYYY")).push(newTask)
-    let temp = [...taskMap.get(selectedDate.format("DD MMMM YYYY")), newTask];
-    setTaskMap((map) => {
-      return new Map(map.set(selectedDate.format("DD MMMM YYYY"), temp));
-    });
-    // setTasksList([...TasksList, newTask]);
+    // // taskMap.get(selectedDate.format("DD MMMM YYYY")).push(newTask)
+    // let temp = [...taskMap.get(selectedDate.format("DD MMMM YYYY")), newTask];
+    // setTaskMap((map) => {
+    //   return new Map(map.set(selectedDate.format("DD MMMM YYYY"), temp));
+    // });
+    // // setTasksList([...TasksList, newTask]);
 
-    // console.log(taskMap)
-    setUserTask("");
+    // // console.log(taskMap)
+    // setUserTask("");
   };
 
   const deleteTask = (id) => {
-    let currentList = taskMap.get(selectedDate.format("DD MMMM YYYY"));
-    // taskMap.set(selectedDate.format("DD MMMM YYYY"),  currentList.filter((task) => task.id !== id))
-    setTaskMap((map) => {
-      return new Map(
-        map.set(
-          selectedDate.format("DD MMMM YYYY"),
-          map
-            .get(selectedDate.format("DD MMMM YYYY"))
-            .filter((task) => task.id !== id)
-        )
-      );
-    });
+    // let currentList = taskMap.get(selectedDate.format("DD MMMM YYYY"));
+    // // taskMap.set(selectedDate.format("DD MMMM YYYY"),  currentList.filter((task) => task.id !== id))
+    // setTaskMap((map) => {
+    //   return new Map(
+    //     map.set(
+    //       selectedDate.format("DD MMMM YYYY"),
+    //       map
+    //         .get(selectedDate.format("DD MMMM YYYY"))
+    //         .filter((task) => task.id !== id)
+    //     )
+    //   );
+    // });
    
     // setTasksList(tempList);
   };
@@ -118,12 +124,12 @@ function ToDo({ selectedDate }) {
           </button>
         </div>
         <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          {taskMap.get(selectedDate.format("DD MMMM YYYY")) !== undefined &&
-            taskMap.get(selectedDate.format("DD MMMM YYYY")).map((task) => (
+          {
+            taskList.map((task) => (
               <div className="p-1">
                 <li key={task.id} className="flex justify-between space-x-5">
                   <label className="text-2xl text-center break-words">
-                    {task.taskName}
+                    {task.text}
                   </label>
                   <button
                     type="button"
