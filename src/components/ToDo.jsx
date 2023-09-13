@@ -9,47 +9,28 @@ function ToDo({ selectedDate }) {
 
   const [taskList, setTaskList] = useState([]);
   const [todayDate, setTodayDate] = useState(selectedDate);
-  // const [temp, setTemp] = useState(null);
-  // const [newTaskObj, setNewTaskObj] = useState({
-  //   id : 0,
-  //   taskName : "nothing"
-  // })
 
   async function fetchData() {
-    let { data: tasks, error } = await supabase.from("tasks").select("*").eq('date', selectedDate.format("DD MMMM YYYY"));
+    let { data: tasks, error } = await supabase
+      .from("tasks")
+      .select("*")
+      .eq("date", selectedDate.format("DD MMMM YYYY"));
 
-    //console.log(tasks);
     setTaskList(tasks);
   }
 
-  // useEffect(() => {
-  //   fetchData();
-
-  //   // supabase
-  //   //   .channel("any")
-  //   //   .on(
-  //   //     "postgres_changes",
-  //   //     { event: "*", schema: "public", table: "tasks" },
-  //   //     (payload) => {
-  //   //       console.log("Change received!", payload);
-  //   //       if (payload.eventType === "DELETE") {
-  //   //         console.log("here");
-  //   //       } else if (payload.eventType === "INSERT") {
-  //   //         console.log("here1");
-  //   //       }
-  //   //     }
-  //   //   )
-  //   //   .subscribe();
-  // }, []);
-
   useEffect(() => {
-    fetchData()
-  }, [selectedDate])
+    fetchData();
+  }, [selectedDate]);
 
   async function insertData(newTask) {
     const { data, error } = await supabase
       .from("tasks")
-      .insert({ id: newTask.id, text: newTask.text, date : selectedDate.format("DD MMMM YYYY") })
+      .insert({
+        id: newTask.id,
+        text: newTask.text,
+        date: selectedDate.format("DD MMMM YYYY"),
+      })
       .select();
   }
 
@@ -68,8 +49,6 @@ function ToDo({ selectedDate }) {
     if (task == "") {
       return;
     }
-    // console.log(newTask.id);
-    // console.log(newTask.text);
 
     setTaskList((prev) => {
       return [...prev, newTask];
@@ -149,7 +128,6 @@ function ToDo({ selectedDate }) {
           ))}
         </ul>
       </div>
-      {/* <div className="bg-slate-600">hello {temp}</div> */}
     </div>
   );
 }
