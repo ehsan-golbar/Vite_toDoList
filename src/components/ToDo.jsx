@@ -5,70 +5,57 @@ import { supabase } from "../supabase";
 
 function ToDo({ selectedDate }) {
   const [userTask, setUserTask] = useState("");
-  // const [taskMap, setTaskMap] = useState(
-  //   new Map(JSON.parse(localStorage.getItem("taskmap")))
-  // );
-  // const [taskMap, setTaskMap] = useState(
-  //   new Map()
-  // );
 
   const [taskList, setTaskList] = useState([]);
   const [todayDate, setTodayDate] = useState(selectedDate);
-  const [temp, setTemp] = useState(null);
+  // const [temp, setTemp] = useState(null);
+  // const [newTaskObj, setNewTaskObj] = useState({
+  //   id : 0,
+  //   taskName : "nothing"
+  // })
 
   async function fetchData() {
     let { data: tasks, error } = await supabase.from("tasks").select();
 
-    console.log(tasks);
+    //console.log(tasks);
     setTaskList(tasks);
   }
 
-  // async function insertData (){
-  //   const { error } = await supabase
-  // .from('tasks')
-  //  .insert({id: 23, text : 'from local'})
-  // console.log(error)
-  // }
 
   useEffect(() => {
     fetchData();
-    // insertData()
+   
 
-    supabase
-      .channel("any")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "tasks" },
-        (payload) => {
-          console.log("Change received!", payload);
-          if (payload.eventType === "DELETE") {
-            console.log("here");
-          } else if (payload.eventType === "INSERT") {
-            console.log("here1");
-          }
-        }
-      )
-      .subscribe();
+    // supabase
+    //   .channel("any")
+    //   .on(
+    //     "postgres_changes",
+    //     { event: "*", schema: "public", table: "tasks" },
+    //     (payload) => {
+    //       console.log("Change received!", payload);
+    //       if (payload.eventType === "DELETE") {
+    //         console.log("here");
+    //       } else if (payload.eventType === "INSERT") {
+    //         console.log("here1");
+    //       }
+    //     }
+    //   )
+    //   .subscribe();
   }, []);
 
-  // useEffect(() => {
 
-  //   taskMap.get(selectedDate.format("DD MMMM YYYY")) === undefined &&
-  //     setTaskMap((map) => {
-  //       return new Map(map.set(selectedDate.format("DD MMMM YYYY"), []));
-  //     });
+      async function insertData(newTask){
+    const { data, error } = await supabase
+      .from("tasks")
+      .insert({id :newTask.id, text: newTask.taskName })
+      .select();
+    }
 
-  //   setTodayDate(selectedDate);
 
-  // }, [selectedDate]);
+ 
 
-  // useEffect(() => {
-  //   //console.log(TasksList);
-  //   localStorage.setItem("taskmap", JSON.stringify([...taskMap]));
-  //   // console.log('here')
-  // }, [taskMap]);
 
-  const creatTask = async (task) => {
+  const creatTask =  (task) => {
     const newTask = {
       id: Math.floor((Math.random() * 500)),
       taskName: task,
@@ -77,45 +64,17 @@ function ToDo({ selectedDate }) {
       return;
     }
     console.log(newTask.id)
-    // // taskMap.get(selectedDate.format("DD MMMM YYYY")).push(newTask)
-    // let temp = [...taskMap.get(selectedDate.format("DD MMMM YYYY")), newTask];
-    // setTaskMap((map) => {
-    //   return new Map(map.set(selectedDate.format("DD MMMM YYYY"), temp));
-    // });
-    // // setTasksList([...TasksList, newTask]);
+    console.log(newTask.taskName)
 
-    // // console.log(taskMap)
-    // setUserTask("");
-    const { data, error } = await supabase
-      .from("tasks")
-      .insert({id :newTask.id, text: newTask.taskName })
-      .select();
+    setTaskList((prev) => { return [...prev, newTask] })
+   
+    setUserTask("");
+    // insertData(newTask)
+  }
+  const deleteTask =  (id) => {
 
-      await fetchData()
-      setUserTask("");
-  };
+    
 
-  const deleteTask = async (id) => {
-    // let currentList = taskMap.get(selectedDate.format("DD MMMM YYYY"));
-    // // taskMap.set(selectedDate.format("DD MMMM YYYY"),  currentList.filter((task) => task.id !== id))
-    // setTaskMap((map) => {
-    //   return new Map(
-    //     map.set(
-    //       selectedDate.format("DD MMMM YYYY"),
-    //       map
-    //         .get(selectedDate.format("DD MMMM YYYY"))
-    //         .filter((task) => task.id !== id)
-    //     )
-    //   );
-    // });
-
-    // setTasksList(tempList);
-    const { error } = await supabase.from("tasks").delete().eq("id", id);
-    console.log(error.message)
-    await fetchData();
-    // setTaskList( (tasks) => {
-    //   return tasks.filter( (task) => { task.id !== id })
-    // })
   };
 
   return (
