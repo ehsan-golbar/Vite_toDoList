@@ -22,10 +22,8 @@ function ToDo({ selectedDate }) {
     setTaskList(tasks);
   }
 
-
   useEffect(() => {
     fetchData();
-   
 
     // supabase
     //   .channel("any")
@@ -44,44 +42,45 @@ function ToDo({ selectedDate }) {
     //   .subscribe();
   }, []);
 
-
-      async function insertData(newTask){
+  async function insertData(newTask) {
     const { data, error } = await supabase
       .from("tasks")
-      .insert({id :newTask.id, text: newTask.text })
+      .insert({ id: newTask.id, text: newTask.text })
       .select();
-    }
+  }
 
+  async function deleteData(selectedId) {
+    const { error } = await supabase
+      .from("tasks")
+      .delete()
+      .eq("id", selectedId);
+  }
 
-    async function deleteData(id){
-
-    }
-
- 
-
-
-  const creatTask =  (task) => {
+  const creatTask = (task) => {
     const newTask = {
-      id: Math.floor((Math.random() * 500)),
+      id: Math.floor(Math.random() * 500),
       text: task,
     };
     if (task == "") {
       return;
     }
-    console.log(newTask.id)
-    console.log(newTask.text)
+    console.log(newTask.id);
+    console.log(newTask.text);
 
-    setTaskList((prev) => { return [...prev, newTask] })
+    setTaskList((prev) => {
+      return [...prev, newTask];
+    });
     setUserTask("");
-    insertData(newTask)
+    insertData(newTask);
+  };
+  const deleteTask = (id) => {
+    setTaskList((prev) => {
+      return prev.filter((task) => {
+        return task.id !== id;
+      });
+    });
 
-  }
-  const deleteTask =  (id) => {
-
-    setTaskList( (prev) => {
-     return prev.filter((task) => { return task.id !== id })
-    })
-
+    deleteData(id);
   };
 
   return (
