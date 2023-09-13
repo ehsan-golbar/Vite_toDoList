@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../index.css";
 import dayjs from "dayjs";
 import { supabase } from "../supabase";
+import { func } from "prop-types";
 
 function ToDo({ selectedDate }) {
   const [userTask, setUserTask] = useState("");
@@ -47,10 +48,14 @@ function ToDo({ selectedDate }) {
       async function insertData(newTask){
     const { data, error } = await supabase
       .from("tasks")
-      .insert({id :newTask.id, text: newTask.taskName })
+      .insert({id :newTask.id, text: newTask.text })
       .select();
     }
 
+
+    async function deleteData(id){
+
+    }
 
  
 
@@ -58,22 +63,24 @@ function ToDo({ selectedDate }) {
   const creatTask =  (task) => {
     const newTask = {
       id: Math.floor((Math.random() * 500)),
-      taskName: task,
+      text: task,
     };
     if (task == "") {
       return;
     }
     console.log(newTask.id)
-    console.log(newTask.taskName)
+    console.log(newTask.text)
 
     setTaskList((prev) => { return [...prev, newTask] })
-   
     setUserTask("");
-    // insertData(newTask)
+    insertData(newTask)
+
   }
   const deleteTask =  (id) => {
 
-    
+    setTaskList( (prev) => {
+     return prev.filter((task) => { return task.id !== id })
+    })
 
   };
 
