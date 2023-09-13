@@ -12,16 +12,15 @@ function ToDo({ selectedDate }) {
   //   new Map()
   // );
 
-  const[taskList, setTaskList] = useState([])
+  const [taskList, setTaskList] = useState([]);
   const [todayDate, setTodayDate] = useState(selectedDate);
   const [temp, setTemp] = useState(null);
 
   async function fetchData() {
     let { data: tasks, error } = await supabase.from("tasks").select();
-    
-    console.log(tasks)
-    setTaskList(tasks)
 
+    console.log(tasks);
+    setTaskList(tasks);
   }
 
   // async function insertData (){
@@ -31,16 +30,28 @@ function ToDo({ selectedDate }) {
   // console.log(error)
   // }
 
-  useEffect(() =>{
-    fetchData()
+  useEffect(() => {
+    fetchData();
     // insertData()
-    
-  }, [])
 
-
+    supabase
+      .channel("any")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "tasks" },
+        (payload) => {
+          console.log("Change received!", payload);
+          if (payload.eventType === "DELETE") {
+            console.log("here");
+          } else if (payload.eventType === "INSERT") {
+            console.log("here1");
+          }
+        }
+      )
+      .subscribe();
+  }, []);
 
   // useEffect(() => {
-
 
   //   taskMap.get(selectedDate.format("DD MMMM YYYY")) === undefined &&
   //     setTaskMap((map) => {
@@ -57,15 +68,15 @@ function ToDo({ selectedDate }) {
   //   // console.log('here')
   // }, [taskMap]);
 
-  const creatTask = (task) => {
-    // const newTask = {
-    //   id: Math.random(),
-    //   taskName: task,
-    // };
-    // if (task == "") {
-    //   return;
-    // }
-
+  const creatTask = async (task) => {
+    const newTask = {
+      id: Math.floor((Math.random() * 500)),
+      taskName: task,
+    };
+    if (task == "") {
+      return;
+    }
+    console.log(newTask.id)
     // // taskMap.get(selectedDate.format("DD MMMM YYYY")).push(newTask)
     // let temp = [...taskMap.get(selectedDate.format("DD MMMM YYYY")), newTask];
     // setTaskMap((map) => {
@@ -75,6 +86,13 @@ function ToDo({ selectedDate }) {
 
     // // console.log(taskMap)
     // setUserTask("");
+    const { data, error } = await supabase
+      .from("tasks")
+      .insert({id :newTask.id, text: newTask.taskName })
+      .select();
+
+      await fetchData()
+      setUserTask("");
   };
 
   const deleteTask = async (id) => {
@@ -90,12 +108,14 @@ function ToDo({ selectedDate }) {
     //     )
     //   );
     // });
-   
+
     // setTasksList(tempList);
-    const { error } = await supabase
-  .from('tasks')
-  .delete()
-  .eq('id', id)
+    const { error } = await supabase.from("tasks").delete().eq("id", id);
+    console.log(error.message)
+    await fetchData();
+    // setTaskList( (tasks) => {
+    //   return tasks.filter( (task) => { task.id !== id })
+    // })
   };
 
   return (
@@ -128,37 +148,36 @@ function ToDo({ selectedDate }) {
           </button>
         </div>
         <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          {
-            taskList.map((task) => (
-              <div className="p-1">
-                <li key={task.id} className="flex justify-between space-x-5">
-                  <label className="text-2xl text-center break-words">
-                    {task.text}
-                  </label>
-                  <button
-                    type="button"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3"
-                    onClick={() => deleteTask(task.id)}
+          {taskList.map((task) => (
+            <div className="p-1">
+              <li key={task.id} className="flex justify-between space-x-5">
+                <label className="text-2xl text-center break-words">
+                  {task.text}
+                </label>
+                <button
+                  type="button"
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3"
+                  onClick={() => deleteTask(task.id)}
+                >
+                  <svg
+                    className="w-6 h-6 text-white dark:text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 16 12"
                   >
-                    <svg
-                      className="w-6 h-6 text-white dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 16 12"
-                    >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M1 5.917 5.724 10.5 15 1.5"
-                      />
-                    </svg>
-                  </button>{" "}
-                </li>
-              </div>
-            ))}
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M1 5.917 5.724 10.5 15 1.5"
+                    />
+                  </svg>
+                </button>{" "}
+              </li>
+            </div>
+          ))}
         </ul>
       </div>
       {/* <div className="bg-slate-600">hello {temp}</div> */}
