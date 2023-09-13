@@ -45,7 +45,7 @@ function ToDo({ selectedDate }) {
   async function insertData(newTask) {
     const { data, error } = await supabase
       .from("tasks")
-      .insert({ id: newTask.id, text: newTask.text })
+      .insert({ id: newTask.id, text: newTask.text, date : selectedDate.format("DD MMMM YYYY") })
       .select();
   }
 
@@ -64,8 +64,8 @@ function ToDo({ selectedDate }) {
     if (task == "") {
       return;
     }
-    console.log(newTask.id);
-    console.log(newTask.text);
+    // console.log(newTask.id);
+    // console.log(newTask.text);
 
     setTaskList((prev) => {
       return [...prev, newTask];
