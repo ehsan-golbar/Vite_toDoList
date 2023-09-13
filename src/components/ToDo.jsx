@@ -16,31 +16,35 @@ function ToDo({ selectedDate }) {
   // })
 
   async function fetchData() {
-    let { data: tasks, error } = await supabase.from("tasks").select();
+    let { data: tasks, error } = await supabase.from("tasks").select("*").eq('date', selectedDate.format("DD MMMM YYYY"));
 
     //console.log(tasks);
     setTaskList(tasks);
   }
 
-  useEffect(() => {
-    fetchData();
+  // useEffect(() => {
+  //   fetchData();
 
-    // supabase
-    //   .channel("any")
-    //   .on(
-    //     "postgres_changes",
-    //     { event: "*", schema: "public", table: "tasks" },
-    //     (payload) => {
-    //       console.log("Change received!", payload);
-    //       if (payload.eventType === "DELETE") {
-    //         console.log("here");
-    //       } else if (payload.eventType === "INSERT") {
-    //         console.log("here1");
-    //       }
-    //     }
-    //   )
-    //   .subscribe();
-  }, []);
+  //   // supabase
+  //   //   .channel("any")
+  //   //   .on(
+  //   //     "postgres_changes",
+  //   //     { event: "*", schema: "public", table: "tasks" },
+  //   //     (payload) => {
+  //   //       console.log("Change received!", payload);
+  //   //       if (payload.eventType === "DELETE") {
+  //   //         console.log("here");
+  //   //       } else if (payload.eventType === "INSERT") {
+  //   //         console.log("here1");
+  //   //       }
+  //   //     }
+  //   //   )
+  //   //   .subscribe();
+  // }, []);
+
+  useEffect(() => {
+    fetchData()
+  }, [selectedDate])
 
   async function insertData(newTask) {
     const { data, error } = await supabase
