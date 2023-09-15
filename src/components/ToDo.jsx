@@ -19,9 +19,20 @@ function ToDo({ selectedDate }) {
     setTaskList(tasks);
   }
 
+  async function signIn () {
+    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
+    console.log(error)
+    console.log(data)
+  }
+
+
   useEffect(() => {
-    fetchData();
-  }, [selectedDate]);
+    signIn()
+  }, []);
+
+  // useEffect(() => {
+  //  fetchData();
+  // }, [selectedDate]);
 
   async function insertData(newTask) {
     const { data, error } = await supabase
