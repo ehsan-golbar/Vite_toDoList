@@ -6,7 +6,7 @@ import { func } from "prop-types";
 
 function ToDo({ selectedDate }) {
   const [userTask, setUserTask] = useState("");
-
+  const [myUser, setMyUser] = useState( null )
   const [taskList, setTaskList] = useState([]);
   const [todayDate, setTodayDate] = useState(selectedDate);
 
@@ -19,17 +19,32 @@ function ToDo({ selectedDate }) {
     setTaskList(tasks);
   }
 
-  async function signIn () {
+  const login = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
     console.log(error)
     console.log(data)
   }
+  // async function signIn () {
+  //   const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
+  //   console.log(error)
+  //   console.log(data)
+  // }
 
 
   // useEffect(() => {
-  //   signIn()
+  //   const session = supabase.auth.getSession();
+  //   setUser(session.user)
+  //   console.log(session)
   // }, []);
 
+  useEffect (  () =>{
+    const getMyUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      setMyUser(user)
+    }
+    getMyUser()
+    
+  }, [])
   // useEffect(() => {
   //  fetchData();
   // }, [selectedDate]);
@@ -77,11 +92,7 @@ function ToDo({ selectedDate }) {
     deleteData(id);
   };
 
-  const login = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
-    console.log(error)
-    console.log(data)
-  }
+
 
   return (
     <div className="grid justify-items-center bg-white rounded-3xl  ">
@@ -90,13 +101,14 @@ function ToDo({ selectedDate }) {
         <h1 className="pt-6 font-bold">
           {selectedDate.format("DD MMMM YYYY")}
         </h1>
-        <button
+          <h1>{ myUser?.email }</h1>
+               <button
             type="button"
             className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={login }
           >
             log in
-          </button>
+          </button> 
         <div className="flex space-x-5 mt-6">
           <input
             type="text"
