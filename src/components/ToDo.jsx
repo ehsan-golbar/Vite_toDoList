@@ -45,9 +45,9 @@ function ToDo({ selectedDate }) {
     getMyUser()
     
   }, [])
-  // useEffect(() => {
-  //  fetchData();
-  // }, [selectedDate]);
+  useEffect(() => {
+   fetchData();
+  }, [selectedDate]);
 
   async function insertData(newTask) {
     const { data, error } = await supabase
