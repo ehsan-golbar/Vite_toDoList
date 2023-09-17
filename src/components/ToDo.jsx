@@ -6,7 +6,7 @@ import { func } from "prop-types";
 
 function ToDo({ selectedDate }) {
   const [userTask, setUserTask] = useState("");
-  const [myUser, setMyUser] = useState( null )
+  const [myUser, setMyUser] = useState(null);
   const [taskList, setTaskList] = useState([]);
   const [todayDate, setTodayDate] = useState(selectedDate);
 
@@ -20,16 +20,17 @@ function ToDo({ selectedDate }) {
   }
 
   const login = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
-    console.log(error)
-    console.log(data)
-  }
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+    console.log(error);
+    console.log(data);
+  };
   // async function signIn () {
   //   const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
   //   console.log(error)
   //   console.log(data)
   // }
-
 
   // useEffect(() => {
   //   const session = supabase.auth.getSession();
@@ -37,18 +38,18 @@ function ToDo({ selectedDate }) {
   //   console.log(session)
   // }, []);
 
-  useEffect (  () =>{
+  useEffect(() => {
     const getMyUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      setMyUser(user)
-    }
-    getMyUser()
-    
-  }, [])
-
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setMyUser(user);
+    };
+    getMyUser();
+  }, []);
 
   useEffect(() => {
-   fetchData();
+    fetchData();
   }, [selectedDate]);
 
   async function insertData(newTask) {
@@ -58,7 +59,7 @@ function ToDo({ selectedDate }) {
         id: newTask.id,
         text: newTask.text,
         date: selectedDate.format("DD MMMM YYYY"),
-        user_id : myUser.id
+        user_id: myUser.id,
       })
       .select();
   }
@@ -95,79 +96,111 @@ function ToDo({ selectedDate }) {
     deleteData(id);
   };
 
-
+  const logout = () => {
+    setMyUser(null);
+  };
+  /*<button
+  type="button"
+  className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  onClick={login }
+>
+  log in
+</button> */
 
   return (
-    <div className="grid justify-items-center bg-white rounded-3xl  ">
-      <div className="p-3">
-        <h1 className="text-5xl font-bold text-center"> To Do List </h1>
-        <h1 className="pt-6 font-bold">
-          {selectedDate.format("DD MMMM YYYY")}
-        </h1>
-          <h1>{ myUser?.email }</h1>
-               <button
-            type="button"
-            className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={login }
-          >
-            log in
-          </button> 
-        <div className="flex space-x-5 mt-6">
-          <input
-            type="text"
-            id="first_name"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-3"
-            placeholder="my new Task"
-            required
-            value={userTask}
-            onChange={(e) => {
-              setUserTask(e.target.value);
-            }}
-          />
+    <>
+      {myUser !== null ? (
+        <div className="grid justify-items-center bg-white rounded-3xl  ">
+          <div className="p-3">
+            <h1 className="text-5xl font-bold text-center"> To Do List </h1>
+            <h1 className="pt-6 font-bold">
+              {selectedDate.format("DD MMMM YYYY")}
+            </h1>
+            <h1>{myUser?.email}</h1>
+           
+            <button
+              type="button"
+              className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={login}
+            >
+              log in
+            </button>
+            <button
+              type="button"
+              className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={logout}
+            >
+              log out
+            </button>
+            <div className="flex space-x-5 mt-6">
+              <input
+                type="text"
+                id="first_name"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-3"
+                placeholder="my new Task"
+                required
+                value={userTask}
+                onChange={(e) => {
+                  setUserTask(e.target.value);
+                }}
+              />
+              <button
+                type="button"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => {
+                  creatTask(userTask);
+                }}
+              >
+                Add a new task
+              </button>
+            </div>
+            <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              {taskList.map((task) => (
+                <div className="p-1">
+                  <li key={task.id} className="flex justify-between space-x-5">
+                    <label className="text-2xl text-center break-words">
+                      {task.text}
+                    </label>
+                    <button
+                      type="button"
+                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3"
+                      onClick={() => deleteTask(task.id)}
+                    >
+                      <svg
+                        className="w-6 h-6 text-white dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 16 12"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 5.917 5.724 10.5 15 1.5"
+                        />
+                      </svg>
+                    </button>{" "}
+                  </li>
+                </div>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <div className="grid justify-items-center bg-white rounded-3xl  ">
+          <h1>please log in</h1>
           <button
             type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={() => {
-              creatTask(userTask);
-            }}
+            className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={login}
           >
-            Add a new task
+            log in
           </button>
         </div>
-        <ul className="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          {taskList.map((task) => (
-            <div className="p-1">
-              <li key={task.id} className="flex justify-between space-x-5">
-                <label className="text-2xl text-center break-words">
-                  {task.text}
-                </label>
-                <button
-                  type="button"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3"
-                  onClick={() => deleteTask(task.id)}
-                >
-                  <svg
-                    className="w-6 h-6 text-white dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 16 12"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M1 5.917 5.724 10.5 15 1.5"
-                    />
-                  </svg>
-                </button>{" "}
-              </li>
-            </div>
-          ))}
-        </ul>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
