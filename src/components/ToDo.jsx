@@ -113,25 +113,23 @@ function ToDo({ selectedDate }) {
         <div className="grid justify-items-center bg-white rounded-3xl  ">
           <div className="p-3">
             <h1 className="text-5xl font-bold text-center"> To Do List </h1>
+
+            <div className="flex justify-between pt-4">
             <h1 className="pt-6 font-bold">
               {selectedDate.format("DD MMMM YYYY")}
             </h1>
-            <h1>{myUser?.email}</h1>
-           
+            {/* <h1>{myUser?.email}</h1> */}
+
+
             <button
               type="button"
-              className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              onClick={login}
-            >
-              log in
-            </button>
-            <button
-              type="button"
-              className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className=" mt-4 text-white bg-blue-500 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               onClick={logout}
             >
               log out
             </button>
+            </div>
+
             <div className="flex space-x-5 mt-6">
               <input
                 type="text"
@@ -189,11 +187,11 @@ function ToDo({ selectedDate }) {
           </div>
         </div>
       ) : (
-        <div className="grid justify-items-center bg-white rounded-3xl  ">
-          <h1>please log in</h1>
+        <div className="grid justify-items-center bg-white rounded-3xl  p-4 pl-5 ">
+          <h1>To add new tasks, please log in</h1>
           <button
             type="button"
-            className=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="p-3 mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={login}
           >
             log in
