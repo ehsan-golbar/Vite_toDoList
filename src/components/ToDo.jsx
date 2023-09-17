@@ -96,7 +96,10 @@ function ToDo({ selectedDate }) {
     deleteData(id);
   };
 
-  const logout = () => {
+  const logout = async () => {
+      
+let { error } = await supabase.auth.signOut()
+      
     setMyUser(null);
   };
   /*<button
