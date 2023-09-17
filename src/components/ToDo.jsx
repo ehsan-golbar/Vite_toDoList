@@ -45,6 +45,8 @@ function ToDo({ selectedDate }) {
     getMyUser()
     
   }, [])
+
+
   useEffect(() => {
    fetchData();
   }, [selectedDate]);
@@ -56,6 +58,7 @@ function ToDo({ selectedDate }) {
         id: newTask.id,
         text: newTask.text,
         date: selectedDate.format("DD MMMM YYYY"),
+        user_id : myUser.id
       })
       .select();
   }
