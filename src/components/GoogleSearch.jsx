@@ -12,7 +12,7 @@ function GoogleSearch() {
       <div class=" mx-auto mt-7 flex  items-center rounded-full border hover:shadow-md">
         <div class="pl-5">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="https://www.w3.org/2000/svg"
             class="h-6 w-6 text-gray-400"
             fill="none"
             viewBox="0 0 24 24"
@@ -32,7 +32,7 @@ function GoogleSearch() {
         />
         <div class="pr-5">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="https://www.w3.org/2000/svg"
             class="h-6 w-6 text-gray-400"
             fill="none"
             viewBox="0 0 24 24"
