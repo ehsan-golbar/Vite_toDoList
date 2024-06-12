@@ -1,8 +1,8 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Simple To do app with abiliy to add and delete tasks on calender.
 
-Currently, two official plugins are available:
+![image](https://github.com/ehsan-golbar/Vite_toDoList/assets/102996244/9afed5f8-ebf5-44cd-bddf-3df7497fd6e8)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
